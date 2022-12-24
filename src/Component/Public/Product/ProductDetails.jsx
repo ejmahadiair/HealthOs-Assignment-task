@@ -48,29 +48,34 @@ const ProductDetails = () => {
               style={{ display: "flex", justifyContent: "center" }}
               onClick={() => {
                 const cart = JSON.parse(window.localStorage.getItem("cart"));
-                if (cart) {
-                  const cartData = [...cart, data];
-                  let have = false;
-                  for (let i = 0; i < cart.length; i++) {
-                    if (Number(cart[i].id) === Number(data.id)) {
-                      have = true;
-                      break;
+                const token = window.localStorage.getItem("token");
+                if (token) {
+                  if (cart) {
+                    const cartData = [...cart, data];
+                    let have = false;
+                    for (let i = 0; i < cart.length; i++) {
+                      if (Number(cart[i].id) === Number(data.id)) {
+                        have = true;
+                        break;
+                      }
                     }
-                  }
-                  if (!have) {
-                    window.localStorage.setItem(
-                      "cart",
-                      JSON.stringify(cartData)
-                    );
-                    message.success("Product added to the cart");
+                    if (!have) {
+                      window.localStorage.setItem(
+                        "cart",
+                        JSON.stringify(cartData)
+                      );
+                      message.success("Product added to the cart");
+                    } else {
+                      message.warning(
+                        "This product already added to your cart list"
+                      );
+                    }
                   } else {
-                    message.warning(
-                      "This product already added to your cart list"
-                    );
+                    window.localStorage.setItem("cart", JSON.stringify([data]));
+                    message.success("Product added to the cart");
                   }
                 } else {
-                  window.localStorage.setItem("cart", JSON.stringify([data]));
-                  message.success("Product added to the cart");
+                  message.warning("You are UnAuthorized!");
                 }
               }}
             >

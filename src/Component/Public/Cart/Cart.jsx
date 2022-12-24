@@ -67,9 +67,19 @@ const Cart = () => {
           type="primary"
           style={{ marginLeft: "auto", marginTop: "10px" }}
           onClick={() => {
-            navigate("/order", {
-              state: { prducts: data, qty: data.length, price: totalPrice },
-            });
+            const token = window.localStorage.getItem("token");
+
+            if (token) {
+              if (data) {
+                navigate("/order", {
+                  state: { prducts: data, qty: data.length, price: totalPrice },
+                });
+              } else {
+                message.error("No product for checkout!");
+              }
+            } else {
+              message.warning("You are unauthorized!");
+            }
           }}
         >
           Check Out ${totalPrice}
