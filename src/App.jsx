@@ -35,8 +35,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/order" element={<Order />} />
+          <Route path="*" element={<Login />} />
         </Route>
-        {token && (
+        {token ? (
           <Route path="/panal" element={<Panal />}>
             <Route index element={<Deshboard />} />
             <Route path="/panal/coustomer/list" element={<Customer />} />
@@ -45,6 +46,8 @@ function App() {
             <Route path="/panal/product/list" element={<ProductListView />} />
             <Route path="/panal/product/create" element={<ProductCreate />} />
           </Route>
+        ) : (
+          <Route path="*" element={<Login />} />
         )}
       </Routes>
     </>
