@@ -7,8 +7,11 @@ const ProductListView = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const product = JSON.parse(window.localStorage.getItem("products"));
-
-    setData([...product, ...productData]);
+    if (product) {
+      setData([...product, ...productData]);
+    } else {
+      setData([...productData]);
+    }
   }, [setData]);
 
   const colomns = [
