@@ -41,6 +41,14 @@ const Manu = () => {
         navigate("/panal/product/list");
       },
     },
+    {
+      label: "Log Out",
+      key: "log out",
+      onClick: () => {
+        window.localStorage.removeItem("token");
+        navigate("/login");
+      },
+    },
   ];
   return (
     <>

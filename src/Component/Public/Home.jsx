@@ -4,6 +4,8 @@ import { Menu } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 const Home = () => {
   const navigate = useNavigate();
+  const token = window.localStorage.getItem("token");
+
   const items = [
     {
       label: "Home",
@@ -32,6 +34,13 @@ const Home = () => {
       key: "register",
       onClick: () => {
         navigate("/register");
+      },
+    },
+    token && {
+      label: "Admin Panal",
+      key: "panal",
+      onClick: () => {
+        navigate("/panal");
       },
     },
   ];
